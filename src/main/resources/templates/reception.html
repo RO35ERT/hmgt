@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Haven Hotel</title>
+    <link rel="stylesheet" th:href="@{/css/reception.css}">
+</head>
+<body>
+  <div class="container">
+      <div class="nav">
+          <div class="logo">
+              <a th:href="@{/reception/}">Haven</a>
+          </div>
+          <div class="search">
+              <form th:action="@{/reception/}">
+                  <input type="search" name="search" id="search" placeholder="invoice number">
+                  <input type="submit" name="" id="" value="Search">
+              </form>
+          </div>
+          <div class="menu">
+              <a th:href="@{/reception/}">Home</a>
+              <a href="#">About</a>
+              <a class="profile">Profile</a>
+          </div>
+      </div>
+
+      <div class="room_panel">
+          <h2 style="text-align: center">Reservations</h2>
+          <table>
+              <tr>
+                  <th>Room Number</th>
+                  <th>Status</th>
+                  <th>Location</th>
+                  <th>Responsible</th>
+                  <th>Invoice #</th>
+                  <th>Action</th>
+                  <th>Action</th>
+              </tr>
+              <tr th:if="${rooms != null}" th:each="room : ${rooms}">
+                  <td th:text="${room.roomNumber}">003</td>
+                  <td th:if="${room.getCheckedIn() && !room.getCheckedOut()}">Occupied</td>
+                  <td th:if="${room.getCheckedOut() && room.getCheckedIn()}">Checked out</td>
+                  <td th:unless="${(!room.getCheckedOut() && room.getCheckedIn()) || room.getCheckedIn()}">Free</td>
+                  <td th:text="${room.getBranch()}">Headquarters</td>
+                  <td>Admin</td>
+                  <td th:text="${room.getInvoiceNo()}"></td>
+                  <td>
+                      <a th:if="${!room.getCheckedOut() && !room.getCheckedIn()}" th:href="@{/reception/checkin/{invoiceId}(invoiceId=${room.getInvoiceNo()})}" class="update">CheckIn</a>
+
+                  </td>
+                  <td>
+                      <a th:if="${!room.getCheckedOut() && room.getCheckedIn()}" th:href="@{/reception/checkout/{invoiceId}(invoiceId=${room.getInvoiceNo()})}" class="update">CheckOut</a>
+
+                  </td>
+              </tr>
+              <tr th:if="${rooms.size()==0}">
+                  <td>No results found</td>
+              </tr>
+          </table>
+      </div>
+  </div>
+</body>
+</html>

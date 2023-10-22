@@ -1,0 +1,39 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+.all{
+    margin: 10px;
+}
+.notification{
+    background-color: var(--primary-color);
+    margin: 15px 10px;
+    box-shadow: 0 0 5px var(--tertially-color);
+    padding: 10px;
+    color: var(--secondary-color);
+}
+.notification:nth-child(even){
+    margin-left: 30px;
+}
+
+.single_notification{
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
+.isRead{
+    display: none;
+    visibility: hidden;
+}
+.notification_notification{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification_notification div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}

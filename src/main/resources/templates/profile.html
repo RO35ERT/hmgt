@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Room</title>
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+</head>
+<body>
+<div class="container">
+    <div class="nav">
+        <div class="logo">
+            <a th:href="@{/}">Haven</a>
+        </div>
+        <div class="menu">
+            <a th:href="@{/}">Home</a>
+        </div>
+    </div>
+
+    <div class="profile show">
+        <div th:object="${user}">
+            <h1>Profile</h1>
+            <div class="details">
+                <p>First Name : <span class="first_name" th:text="${user.name}"></span></p>
+                <p>Last Name: <span class="last_name" th:text="${user.lastName}"></span></p>
+                <p >Middle Name: <span class="middle_name" th:text="${user.middleName}"></span></p>
+                <p >Residential: <span class="residential" th:text="${user.residential}"></span></p>
+                <p>Postal: <span class="postal" th:text="${user.postal}"></span></p>
+                <p>Email: <span th:text="${user.email}"></span></p>
+                <a class="update_profile" href="">edit</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="update_form">
+        <form th:action="@{/user/updateProfile}" th:object="${userDto}" method="post">
+            <h1>
+                <span>Update Profile</span>
+                <span style="color: red;cursor: pointer;" class="close_update">X</span>
+            </h1>
+            <input th:field="*{name}" type="text" name="first_name" id="first_name">
+            <input th:field="*{lastName}" type="text" name="last_name" id="last_name">
+            <input th:field="*{middleName}" type="text" name="middle_name" id="middle_name">
+            <input th:field="*{residential}" type="text" name="residential" id="residential">
+            <input th:field="*{postal}" type="text" name="postal" id="postal">
+            <input th:object="${user}" th:field="*{email}" type="hidden" name="email" th:value="${user.email}">
+            <a class="change_password">Change Password</a>
+            <p style="color: green" class="email_message"></p>
+            <input  type="submit" value="update">
+        </form>
+    </div>
+</div>
+
+<script src="/js/update_profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Email</title>
+</head>
+<body>
+<div class="container">
+    <div class="valid" th:if="${msg.equals('success')}">
+        <p style="color: green;">Activation completed successfully!</p>
+        <br>
+        <a style="color: #0275d8;text-decoration: none" th:href="@{/login}">login</a>
+    </div>
+    <div class="not-valid" th:if="${msg.equals('failure')}">
+        <p style="color: green;">The link has expired</p>
+        <br>
+        <a style="color: #0275d8;text-decoration: none" th:href="@{/resendToken}">send new</a>
+    </div>
+</div>
+</body>
+</html>

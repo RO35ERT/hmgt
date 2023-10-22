@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Room</title>
+    <link rel="stylesheet" th:href="@{/css/payment.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+<div class="nav">
+    <div class="logo">
+        <a th:href="@{/}">Haven</a>
+    </div>
+    <div class="menu">
+        <a th:href="@{/}">Home</a>
+        <a href="#">About</a>
+        <div>
+            <a sec:authorize="isFullyAuthenticated()" th:href="@{/logout}">Logout</a>
+            <a sec:authorize="!isFullyAuthenticated()" th:href="@{/login}">Login</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="payment">
+        <div class="payment_details" th:object="${reservePayment}">
+            <p>Total Amount: <span>ZMW </span><span th:text="${reservePayment.getTotalAmount()}"></span></p>
+            <p>Total days: <span></span><span >7</span></p>
+            <p>Room Number: <span th:text="${roomNumber}">BC103</span></p>
+            <p>Hotel Name: <span>Haven(Chipata)</span></p>
+        </div>
+        <form th:action="@{/user/savePayment}" method="post">
+<!--            <div class="price">ZMW <span class="pricePerDay"></span> day</div>-->
+<!--            <div class="check_period">-->
+<!--                <div>-->
+<!--                    <label for="checkin">CHECK-IN</label>-->
+<!--                    <input type="date" name="checkin" id="checkin" required min="">-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <label for="checkout">CHECK-OUT</label>-->
+<!--                    <input type="date" name="checkout" id="checkout">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="details">-->
+<!--                <p>Calculations</p>-->
+<!--                <p class="nod">1 day</p>-->
+<!--                <p class="tax">VAT: 16%</p>-->
+<!--                <div class="totalprice">ZMW <span class="total">7,890</span></div>-->
+<!--                <input type="hidden" class="totalAmount">-->
+<!--            </div>-->
+            <p>Choose your payment option</p>
+            <div class="payment_type">
+                <div>
+                    <input type="radio" class="check" name="paymentType" id="visa" value="visa">
+                    <label for="visa"><img src="https://cdn.visa.com/v2/assets/images/logos/visa/blue/logo.png" alt=""></label>
+                </div>
+                <div>
+                    <input type="radio" name="paymentType" class="check" id="mastercard" value="mastercard">
+                    <label for="mastercard"><img src="https://www.mastercard.us/content/dam/public/mastercardcom/na/us/en/homepage/Home/mc-logo-52.svg" alt=""></label>
+                </div>
+                <div>
+                    <input type="radio" name="paymentType" id="airtel" value="airtel" class="check">
+                    <label for="airtel"><img src="https://www.airtel.co.zm/assets/images/airtel-logo.png" alt=""></label>
+                </div>
+                <div>
+                    <input type="radio" name="paymentType" id="mtn" value="mtn" class="check">
+                    <label for="mtn"><img src="https://www.mtn.zm/wp-content/themes/mtn-yelloweb/images/mtn-logo-nav-new.svg" alt=""></label>
+                </div>
+            </div>
+            <div class="mobile">
+                <p>Mobile Money Payment</p>
+                <div class="">
+                    <label for="momo">Mobile Number</label>
+                    <input type="text" name="momo" id="momo">
+                </div>
+            </div>
+            <div class="cards">
+                <p>Card Payment</p>
+                <div class="">
+                    <label for="name">Name</label>
+                    <input type="text" id="name">
+                </div>
+                <div class="">
+                    <label for="card_number">Card Number</label>
+                    <input type="text" id="card_number">
+                </div>
+                <div class="card_dits">
+                    <label for="expiration">Expiration(mm/yy)</label>
+                    <input type="text" id="expiration">
+                </div>
+                <div class="card_dits">
+                    <label for="code">Security Code</label>
+                    <input type="text" id="code">
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Pay" class="reserve">
+                <p style="color: green">Your payment was made successfully!</p>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="footer">
+    <div class="address">
+        <p>Plot No. 7</p>
+        <p>Along Great East Road</p>
+        <p>Opposite East Park Mall</p>
+        <p>Lusaka</p>
+        <p>Zambia</p>
+    </div>
+    <div class="contact">
+        <p><span class="material-symbols-outlined"> call</span> +260 962 418 322</p>
+        <p><span class="material-symbols-outlined"> call</span> +260 962 418 322</p>
+    </div>
+    <div class="customers">
+        <p><u>Our Partners</u></p>
+        <p>The University of Zambia</p>
+        <p>East Park Mall</p>
+        <p>Ministry of Tourism</p>
+    </div>
+
+</div>
+
+<script th:src="@{/js/payment.js}"></script>
+</body>
+</html>

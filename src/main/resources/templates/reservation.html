@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Room</title>
+    <link rel="stylesheet" th:href="@{/css/room.css}">
+    <link rel="stylesheet" th:href="@{/css/notification.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+<div class="nav">
+    <div class="logo">
+        <a th:href="@{/}">Haven</a>
+    </div>
+    <div class="menu">
+        <a th:href="@{/}">Home</a>
+        <a href="#">About</a>
+        <div>
+            <a sec:authorize="isFullyAuthenticated()" th:href="@{/logout}">Logout</a>
+            <a sec:authorize="!isFullyAuthenticated()" th:href="@{/login}">Login</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="all">
+        <div th:each="res: ${reservation}" class="notification" th:unless="${res.paid}">
+            <a class="single_notification">
+                <div class="notification_notification">
+                    <div class="">
+                        <p>Room Number: <span th:text="${res.room.roomNumber}"></span></p>
+                        <p>Check In: <span th:text="${res.checkInDate}"></span></p>
+                        <p>Check In: <span th:text="${res.checkOutDate}"></span></p>
+                        <p>Total Amount: ZMW <span th:text="${res.totalAmount}"></span></p>
+                    </div>
+                    <a th:href="@{/user/payment/{reserveId}(reserveId=${res.getReserveId()})}" class="material-symbols-outlined" style="color: green; cursor: pointer">pay</a>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="address">
+        <p>Plot No. 7</p>
+        <p>Along Great East Road</p>
+        <p>Opposite East Park Mall</p>
+        <p>Lusaka</p>
+        <p>Zambia</p>
+    </div>
+    <div class="contact">
+        <p><span class="material-symbols-outlined"> call</span> +260 962 418 322</p>
+        <p><span class="material-symbols-outlined"> call</span> +260 962 418 322</p>
+    </div>
+    <div class="customers">
+        <p><u>Our Partners</u></p>
+        <p>The University of Zambia</p>
+        <p>East Park Mall</p>
+        <p>Ministry of Tourism</p>
+    </div>
+
+</div>
+
+<script th:src="@{/js/notification.js}"></script>
+</body>
+</html>
