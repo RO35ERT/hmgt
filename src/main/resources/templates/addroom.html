@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Room</title>
+    <link rel="stylesheet" th:href="@{/css/addroom.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <div class="logo">
+                <a th:href="@{/admin/}">Haven</a>
+            </div>
+            <div class="menu">
+                <a th:href="@{/admin/}">Home</a>
+            </div>
+        </div>
+
+        <div class="addroom">
+            <form th:action="@{/admin/createroom}" method="post" th:object="${roomDto}" enctype="multipart/form-data">
+                <h1>Add Room</h1>
+                <p class="message" th:text="${message}">Message</p>
+                <div>
+                    <label for="roomnumber">Room Number</label>
+                    <input th:field="*{roomNumber}" type="text" name="roomnumber" id="roomnumber">
+                </div>
+                <div>
+                    <label for="room_type">Room Type</label>
+                    <select name="room_type" id="room_type" th:field="*{roomType}">
+                        <option value="suite">Suite</option>
+                        <option value="studio">Studio Apartment</option>
+                        <option value="presidential">Presidential Suite</option>
+                        <option value="executive">Executive Suite</option>
+                        <option value="penthouse">Penthouse Apartment</option>
+                    </select>
+                </div>
+                <div >
+                    <label for="branch">Branch</label>
+                    <select name="branch" id="branch" th:field="*{branch}">
+                        <option th:each="branch :${branches}" th:value="${branch.branch}" th:text="${branch.branch}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label th:field="*{ammenities}" for="ammenities">Amenities(separated by commas)</label>
+                    <input type="text" name="ammenities" id="ammenities">
+                </div>
+                <div>
+                    <label th:field="*{price}" for="price">Price</label>
+                    <input type="text" name="price" id="price">
+                </div>
+                <div>
+                    <label for="image">Image<span style="color: green;">(png or jpg only)</span></label>
+                    <input type="file" name="image" id="image">
+                </div>
+
+                <div>
+                    <input type="submit" value="create" id="create">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

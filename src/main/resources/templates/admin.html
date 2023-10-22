@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <div class="logo">
+                <a th:href="@{/admin/}">Haven</a>
+            </div>
+            <div class="menu">
+                <a th:href="@{/admin/addroom}">Add Room</a>
+                <a class="branch">Add Branch</a>
+            </div>
+        </div>
+        <main>
+            <div class="add_branch">
+                <a class="close_branch">x</a>
+                <form th:action="@{/admin/createbranch}" method="post">
+                    <h1>Add Branch</h1>
+                    <input type="text" name="branch" id="branch">
+                    <input type="submit" value="Create">
+                </form>
+            </div>
+            <div class="top">
+                <div class="rooms">
+                    <div class="get_room">
+                        <p class="get_room_title">Total Rooms</p>
+                        <p class="get_room_input">All Timer</p>
+                    </div>
+                    <p class="get_room_value" th:text="${totalRooms}">
+                        450
+                    </p>
+                </div>
+                <div class="rooms">
+                    <div class="get_room">
+                        <p class="get_room_title">Increase</p>
+                        <p class="get_room_input">All Timer</p>
+                    </div>
+                    <p th:text="${roomIncrease}" class="get_room_value">
+                    </p>
+                </div>
+                <div class="rooms">
+                    <div class="get_room">
+                        <p class="get_room_title">Occupied</p>
+                        <p class="get_room_input">
+                        <form class="for_month_form" action="">
+                            <input type="month" name="for_month" class="for_month">
+                        </form>
+                        </p>
+                    </div>
+                    <p th:text="${occupied}" class="get_room_value">
+                        450
+                    </p>
+                </div>
+                <div class="rooms">
+                    <div class="get_room">
+                        <p class="get_room_title">Reserves</p>
+                        <form class="for_month_form" action="">
+                            <input type="month" name="for_month" class="for_month" id="for_reserves">
+                        </form>
+                    </div>
+                    <p id="reserve" class="get_room_value" th:text="${totalReserves}">
+                        450
+                    </p>
+                </div>
+                <div class="rooms">
+                    <div class="get_room">
+                        <p class="get_room_title">Pending</p>
+                        <form class="for_month_form" action="">
+                            <input type="month" name="for_month" class="for_month" id="for_pending_reserves">
+                        </form>
+                    </div>
+                    <p id="pending_reserves" th:text="${reserveCount}" class="get_room_value">
+                    </p>
+                </div>
+                <div class="rooms">
+                    <div class="get_room">
+                        <p class="get_room_title">income</p>
+                        <form class="for_month_form" action="">
+                            <input type="month" name="for_month" class="for_month" id="for_income">
+                        </form>
+                    </div>
+                    <p id="income" th:text="${#numbers.formatCurrency((sum))}" class="get_room_value">
+                    </p>
+                </div>
+                <div class="rooms">
+                    <div class="get_room">
+                        <p class="get_room_title">increase</p>
+                        <form class="for_month_form" action="">
+                            <input type="month" name="for_month" class="for_month">
+                        </form>
+                    </div>
+                    <p class="get_room_value">
+                        4500
+                    </p>
+                </div>
+                <div class="rooms">
+                    <div class="get_room">
+                        <p class="get_room_title">reduction</p>
+                        <form class="for_month_form" action="">
+                            <input type="month" name="for_month" class="for_month">
+                        </form>
+                    </div>
+                    <p class="get_room_value">
+                        4500
+                    </p>
+                </div>
+
+            </div>
+            <hr>
+            <div class="bottom">
+                <div class="room_panel">
+                    <h2>Rooms</h2>
+                    <table>
+                        <tr th:each="room : ${allRooms}">
+                            <td class="room_roomNumber" th:text="${room.roomNumber}">
+                            </td>
+                            <td th:if="${room.status}">Occupied</td>
+                            <td th:unless="${room.status}">Free</td>
+                            <td class="room_room_price" th:text="${room.price}">Headquarters</td>
+                            <td>Admin</td>
+                            <td class="room_room_type" th:text="${room.roomType}" ></td>
+                            <input  th:value="*{room.ammenities}" type="hidden" name="roomnumber" id="ammenitiesValue">
+                            <td>
+                                <button class="update">update</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="notification_panel">
+                    <h2>Recent activity</h2>
+                    <table>
+                            <tr th:each="notification:${allNotification}">
+                                <td th:text="${notification.getNotification()}"></td>
+                                <td th:text="${#dates.format(notification.getDate(),'yyyy-MM-dd HH:mm:ss')}"></td>
+                            </tr>
+                    </table>
+                    <div class="nav-pages" th:each="total : ${totalPages}">
+                        <div th:if="${cPage>1}"  class="more_btn">
+                            <a class="more" th:href="@{'/admin/page/'+ ${cPage - 1}}">Prev</a>
+                        </div>
+                        <div th:each="page :${#numbers.sequence(1,totalPages)}" class="more_btn">
+                            <a class="more" th:text="${page}" th:href="@{'/admin/page/'+ ${page}}"></a>
+                        </div>
+                        <div th:if="${totalPages>cPage}"  class="more_btn">
+                            <a class="more" th:href="@{'/admin/page/'+ ${cPage+1}}">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="update_form">
+                <form th:action="@{/admin/updateroom}" th:object="${roomDto}" method="post">
+                    <div class="update_top">
+                        <p class="message">Update</p>
+                        <p class="cancel">x</p>
+                    </div>
+
+                    <div>
+<!--                        <label for="roomnumber">Room Number</label>-->
+                        <input  th:field="*{roomNumber}" type="hidden" name="roomnumber" id="roomnumber">
+                    </div>
+                    <div>
+                        <label for="room_type">Room Type</label>
+                        <select th:field="*{roomType}" name="room_type" id="room_type">
+                            <option value="suite">Suite</option>
+                            <option value="studio">Studio Apartment</option>
+                            <option value="presidential">Presidential Suite</option>
+                            <option value="executive">Executive Suite</option>
+                            <option value="penthouse">Penthouse Apartment</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <label for="ammenities">Ammenities(Seperated by commas)</label>
+                        <input type="text" th:field="*{ammenities}" name="ammenities" id="ammenities">
+                    </div>
+                    <div>
+                        <label th:field="*{price}" for="price">Price</label>
+                        <input type="text" name="price" id="price">
+                    </div>
+                    <div>
+                        <input type="submit" value="update" id="create">
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>

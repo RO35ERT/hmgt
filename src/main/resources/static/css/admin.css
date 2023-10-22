@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;700&family=Montserrat:wght@300;500;600&family=Poppins:wght@300;400&family=Roboto:wght@300;400;500&display=swap');
+:root{
+    --primary-color: #0275d8;
+    --secondary-color: #f1f1f1;
+    --tertially-color: #010101;
+
+}
+*,
+::before,
+::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background: var(--secondary-color);
+    font-family: "Montserrat", sans-serif;
+}
+main{
+    position: relative;
+}
+a{
+    color: var(--tertially-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+p{
+    font-size: 16px;
+}
+img{
+    height: 70px;
+}
+form input[type="month"]{
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--secondary-color);
+}
+
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: var(--primary-color);
+}
+.logo a{
+    color: var(--secondary-color);
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+}
+.menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+.menu a{
+    color: var(--secondary-color);
+    font-family: "Poppins", sans-serif;
+}
+
+.menu a:hover{
+    filter: brightness(150%);
+}
+.add_branch{
+    position: absolute;
+    background: var(--secondary-color);
+    box-shadow: 0 0 10px var(--tertially-color);
+    border-radius: 10px;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%);
+    visibility: hidden;
+}
+.show_branch{
+    visibility: visible;
+}
+.add_branch .close_branch{
+    color: red;
+    position: absolute;
+    right: 20px;
+    top:8px;
+    font-size: 18px;
+}
+
+.add_branch form{
+    padding: 0 20px 20px 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.add_branch form input[type="submit"]{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+.content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+.top{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.more_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+
+}
+.more{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 2px 10px;
+    border-radius: 2px;
+    border: 1px solid var(--primary-color);
+    margin: 4px 0;
+}
+.more:hover{
+    border: 1px solid var(--primary-color);
+    background: none;
+    color: var(--primary-color);
+}
+
+.nav-pages{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rooms
+{
+    width: 300px;
+    background-color: var(--tertially-color);
+    border-radius: 8px;
+    color: var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.top div:nth-child(3){
+    background-color: var(--primary-color);
+}
+.top div:nth-child(2){
+    background-color: green;
+}
+.top div:nth-child(5){
+    background-color: orangered;
+}
+.top div:nth-child(6){
+    background-color: green;
+}
+.top div:nth-child(8){
+    background-color: darkred;
+}
+.rooms div,
+.rooms p,
+.rooms input
+{
+    margin: 10px;
+}
+
+.get_room_title{
+    font-size: 24px;
+    text-transform: uppercase;
+}
+.get_room_value{
+    font-size: 32px;
+}
+
+.get_room p input{
+    margin-left: 0;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    color: var(--secondary-color);
+}
+
+.rooms:hover{
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 10px var(--tertially-color);
+    color: var(--tertially-color);
+    cursor: pointer;
+}
+.bottom{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.delete,
+.update{
+    border: none;
+    padding: 5px 10px;
+    color: var(--secondary-color);
+    margin: auto 5px;
+    cursor: pointer;
+}
+.delete{
+    background-color: darkred;
+}
+.update{
+    background-color: green;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    text-align: left;
+}
+
+table,th,td{
+    border-bottom: 1px solid #010101;
+}
+th, td{
+    padding: 5px;
+    margin: 4px 0;
+}
+
+.room_panel table tr{
+    background-color: transparent;
+    color: var(--tertially-color);
+}
+
+.update_form{
+    margin: 50px auto;
+    box-shadow: 0 0 10px var(--primary-color);
+    background-color: var(--secondary-color);
+    width: 400px;
+    border-radius: 10px;
+    position: absolute;
+    top: 10px;
+    left: 40%;
+    visibility: hidden;
+}
+.show_update{
+    visibility: visible;
+}
+.update_top{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    gap: 140px;
+}
+.cancel{
+    color: red;
+    cursor: pointer;
+}
+
+form h1{
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+}
+
+form div{
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    gap: 10px;
+}
+form input[type="text"],
+form input[type="file"],
+form select{
+    height: 30px;
+    outline: none;
+    font-size: 18px;
+    text-indent: 5px;
+}
+form input[type="file"]{
+    text-indent: 0;
+}
+form input[type="submit"]{
+    padding: 8px 0;
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+}
+.message{
+    font-size: 20px;
+}
